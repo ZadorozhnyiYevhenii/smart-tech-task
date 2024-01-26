@@ -13,18 +13,17 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    showDetails() {
+      this.$emit('userSelected', this.user);
     }
   }
 }
 </script>
 
 <template>
-  <div class="user">
-    <img 
-      :src="user.avatar"
-      :alt="user.first_name + '-' + user.avatar"
-      class="user__img"
-    >
+  <div class="user" @click="showDetails">
+    <img :src="user.avatar" :alt="user.first_name + '-' + user.avatar" class="user__img">
     <div class="user__info">
       <div class="user__name">{{ user.first_name }}</div>
       <div class="user__email">{{ user.email }}</div>
@@ -52,17 +51,18 @@ export default {
 
   &__info {
     flex: 1;
+  }
 
-    &__name {
-      font-size: 18px;
-      font-weight: bold;
-      color: #333;
-      margin-bottom: 5px;
-    }
+  &__name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
 
-    &__email {
-      color: #777;
-    }
+  &__email {
+    color: #777;
   }
 
   &__delete-btn {
