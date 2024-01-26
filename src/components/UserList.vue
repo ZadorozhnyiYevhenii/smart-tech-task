@@ -35,9 +35,14 @@ export default {
       try {
         const response = await axios.post('https://reqres.in/api/users', this.newUser);
         this.users.push(response.data);
+        this.clearForm();
       } catch (error) {
         console.error(error);
       }
+    },
+    clearForm() {
+      this.newUser.email = '';
+      this.newUser.first_name = '';
     },
     handleUserDelete(deletedUserId) {
       this.users = this.users.filter(user => user.id !== deletedUserId);
@@ -70,33 +75,28 @@ export default {
 <template>
   <div class="user-top">
     <CustomSelect 
-      :options="sortOptions" 
+      :options="sortOptions"
       v-bind:modelValue="selectedSort"
       v-on:update:modelValue="selectedSort = $event" 
-      />
-    <input 
-      type="text" 
-      v-model="searchQuery" 
-      placeholder="Search user by name"
-      class="user-top__input"
-      >
+    />
+    <input type="text" v-model="searchQuery" placeholder="Search user by name" class="user-top__input">
   </div>
 
   <div class="user__list">
     <UserItem 
       v-for="user in sortedAndSearchProducts" 
       :key="user.id" 
-      :user="user" 
+      :user="user"
       @userDeleted="handleUserDelete"
       @userSelected="showUserDetails"
-      />  
+    />
   </div>
 
-    <UserDetails 
-      :user="selectedUser" 
-      :isVisible="isUserDetailsVisible" 
-      @close="closeUserDetails"
-    />
+  <UserDetails 
+    :user="selectedUser" 
+    :isVisible="isUserDetailsVisible" 
+    @close="closeUserDetails" 
+  />
 
   <form @submit.prevent="addUser" class="user-form">
     <label class="user-form__label" for="name">Name:</label>
