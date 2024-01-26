@@ -25,7 +25,7 @@ export default {
       </div>
       <div class="user-details__content">
         <div class="user-details__info">
-          <img :src="user.avatar" :alt="user.first_name + '-' + user.avatar" class="user-details__img">
+          <img :src="user.avatar" :alt="user.first_name + ' avatar'" class="user-details__img">
           <div class="user-details__name">{{ user.first_name }} {{ user.last_name }}</div>
           <div class="user-details__email">{{ user.email }}</div>
         </div>

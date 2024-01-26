@@ -1,8 +1,10 @@
 <script>
-import axios from 'axios';
 import UserItem from './UserItem.vue';
 import UserDetails from './UserDetails.vue';
 import CustomSelect from './CustomSelect.vue';
+import { fetchUsers } from './../api/helpers/getUsers';
+import { addUser } from './../api/helpers/addUser'
+import FormAddUser from './FormAddUser.vue';
 
 export default {
   data() {
@@ -25,16 +27,15 @@ export default {
   methods: {
     async fetchUsers() {
       try {
-        const response = await axios.get('https://reqres.in/api/users');
-        this.users = response.data.data;
+        this.users = await fetchUsers();
       } catch (error) {
         console.error(error);
       }
     },
     async addUser() {
       try {
-        const response = await axios.post('https://reqres.in/api/users', this.newUser);
-        this.users.push(response.data);
+        const response = await addUser(this.newUser);
+        this.users.push(response);
         this.clearForm();
       } catch (error) {
         console.error(error);
@@ -56,7 +57,7 @@ export default {
       this.isUserDetailsVisible = false;
     }
   },
-  components: { UserItem, UserDetails, CustomSelect },
+  components: { UserItem, UserDetails, CustomSelect, FormAddUser },
   mounted() {
     this.fetchUsers();
   },
@@ -70,7 +71,6 @@ export default {
   },
 };
 </script>
-
 
 <template>
   <div class="user-top">
@@ -98,15 +98,10 @@ export default {
     @close="closeUserDetails" 
   />
 
-  <form @submit.prevent="addUser" class="user-form">
-    <label class="user-form__label" for="name">Name:</label>
-    <input v-model="newUser.first_name" type="text" class="user-form__input" placeholder="Your name">
-
-    <label class="user-form__label" for="email">Email:</label>
-    <input v-model="newUser.email" type="text" class="user-form__input" placeholder="Your email">
-
-    <button type="submit" class="user-form__button">Add new user</button>
-  </form>
+  <FormAddUser 
+    :newUser="newUser" 
+    @addUser="addUser" 
+  />
 </template>
 
 <style lang="scss">

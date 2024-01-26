@@ -22,10 +22,14 @@ export default {
 </script>
 
 <template>
-  <div class="user" @click="showDetails">
-    <img :src="user.avatar" :alt="user.first_name + '-' + user.avatar" class="user__img">
+  <div class="user">
+    <img 
+      :src="user.avatar || 'https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png'" 
+      :alt="user.first_name + '-' + user.avatar" 
+      class="user__img"
+    >
     <div class="user__info">
-      <div class="user__name">{{ user.first_name }}</div>
+      <div class="user__name" @click="showDetails">{{ user.first_name }}</div>
       <div class="user__email">{{ user.email }}</div>
     </div>
     <button @click="deleteUser" class="user__delete-btn">Delete user</button>
