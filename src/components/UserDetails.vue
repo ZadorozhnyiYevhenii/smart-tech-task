@@ -4,10 +4,6 @@ export default {
     user: Object,
     isVisible: false
   },
-  isVisible: {
-    type: Boolean,
-    required: false,
-  },
   methods: {
     closeModal() {
       this.$emit('close');

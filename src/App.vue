@@ -45,8 +45,8 @@ export default {
       this.newUser.email = '';
       this.newUser.first_name = '';
     },
-    handleUserDelete(deletedUserId) {
-      this.users = this.users.filter(user => user.id !== deletedUserId);
+    handleUserDelete(userId) {
+      this.users = this.users.filter(user => user.id !== userId);
     },
     showUserDetails(user) {
       this.selectedUser = user;
@@ -77,8 +77,8 @@ export default {
     <div class="user-top">
       <CustomSelect 
         :options="sortOptions"
-        v-bind:modelValue="selectedSort"
-        v-on:update:modelValue="selectedSort = $event" 
+        :modelValue="selectedSort"
+        @update:modelValue="selectedSort = $event" 
       />
       <input 
         type="text" 
@@ -90,8 +90,8 @@ export default {
 
     <UserList 
       :users="sortedAndSearchProducts" 
-      :handleUserDelete="handleUserDelete"
-      :showUserDetails="showUserDetails"
+      @userDeleted="handleUserDelete"
+      @userSelected="showUserDetails"
     />
 
     <UserDetails 

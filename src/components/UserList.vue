@@ -7,10 +7,16 @@ export default {
       type: Array,
       default: () => [],
     },
-    handleUserDelete: Function,
-    showUserDetails: Function,
   },
-  components: { UserItem }
+  components: { UserItem },
+  methods: {
+    handleUserDelete(userId) {
+      this.$emit('userDeleted', userId);
+    },
+    handleShowUserDetails(user) {
+      this.$emit('userSelected', user);
+    }
+  } 
 };
 </script>
 
@@ -21,8 +27,8 @@ export default {
       v-for="user in users" 
       :key="user.id" 
       :user="user"
-      @userDeleted="handleUserDelete(user.id)"
-      @userSelected="showUserDetails(user)"
+      @userDeleted="handleUserDelete(user.id)" 
+      @userSelected="handleShowUserDetails(user)"
     />
   </div>
 

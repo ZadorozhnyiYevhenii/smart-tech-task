@@ -29,7 +29,7 @@ export default {
         this.validationErrors.name = 'Name is required';
       }
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!this.newUser.email.trim()) {
         this.validationErrors.email = 'Email is required';
       } else if (!emailRegex.test(this.newUser.email.trim())) {
