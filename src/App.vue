@@ -80,13 +80,18 @@ export default {
         v-bind:modelValue="selectedSort"
         v-on:update:modelValue="selectedSort = $event" 
       />
-      <input type="text" v-model="searchQuery" placeholder="Search user by name" class="user-top__input">
+      <input 
+        type="text" 
+        v-model="searchQuery" 
+        placeholder="Search user by name"
+        class="user-top__input"
+      >
     </div>
 
     <UserList 
-    :users="sortedAndSearchProducts" 
-    :handleUserDelete="handleUserDelete"
-    :showUserDetails="showUserDetails"
+      :users="sortedAndSearchProducts" 
+      :handleUserDelete="handleUserDelete"
+      :showUserDetails="showUserDetails"
     />
 
     <UserDetails 
