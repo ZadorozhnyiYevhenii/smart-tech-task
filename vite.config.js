@@ -1,13 +1,12 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import ViteGHPages from 'vite-plugin-gh-pages';
+import { fileURLToPath } from 'node:url';
 
 export default defineConfig({
   plugins: [
     vue(),
-    ViteGHPages(),
   ],
-  base: '/smart-tech-task/',
+  base: '/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

@@ -1,4 +1,4 @@
-import { instance } from "../client";
+import { instance } from "../core";
 
 export async function addUser(newUser) {
   try {
