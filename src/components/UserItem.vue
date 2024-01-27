@@ -1,5 +1,5 @@
 <script>
-import axios from 'axios';
+import { deleteUser } from '@/api/helpers/deleteUser';
 
 export default {
   props: {
@@ -8,7 +8,7 @@ export default {
   methods: {
     async deleteUser() {
       try {
-        await axios.delete(`https://reqres.in/api/users/${this.user.id}`);
+        await deleteUser(this.user.id)
         this.$emit('userDeleted', this.user.id);
       } catch (error) {
         console.error(error);
